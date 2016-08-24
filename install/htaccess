@@ -1,0 +1,51 @@
+# Enable the CodeIgnitor MVC System
+RewriteEngine on
+RewriteCond $1 !^(index\.php|images|robots\.txt|include|misc|licenses)
+# CGI mode has "?" after index.php. CGI mode is auto-detected in the install and it adds the "?".
+RewriteRule ^(.*)$ /index.php/$1 [L]
+
+# Short cache max-age in case site is upgraded and the old cahce may stop it from working
+# You are welcome to make the max-age longer if you know what you are doing.
+<IfModule mod_headers.c>
+   <FilesMatch "\.(js|css)$">
+      Header set Cache-Control "max-age=7200, public, no-transform, must-revalidate"
+   </FilesMatch>
+   <FilesMatch "\.(jpg|gif|png|jpeg|pdf|htm|html|ico)$">
+      Header set Cache-Control "max-age=86400, public"
+   </FilesMatch>
+   <FilesMatch "\.swf$">
+      Header set Cache-Control "max-age=604800, public"
+   </FilesMatch>
+</IfModule>
+
+# SVG file type and encoding - doesn't change often
+<FilesMatch "\.(svg|svgz)$">
+   AddType image/svg+xml svg svgz
+   <FilesMatch "\.svgz$">
+      <IfModule mod_headers.c>
+         Header append Vary Accept-Encoding
+         Header append Content-Encoding gzip
+      </IfModule>
+      <IfModule !mod_headers.c>
+         AddEncoding gzip svgz
+      </IfModule>
+   </FilesMatch>
+   <IfModule mod_headers.c>
+      Header set Cache-Control "max-age=604800, public"
+   </IfModule>
+</FilesMatch>
+
+# Turn on Apache compression.
+# This is an agressive compression config - will compress most output and input. Most sites are stand alone so this is a good idea.
+# It is suggested to set DeflateCompressionLevel to 1 or 2 (default is 6) in httpd.conf to less CPU load but still get a huge size reduction
+<IfModule mod_deflate.c>
+   <FilesMatch "\.(php|js|css|html|htm)$">
+      AddOutputFilterByType DEFLATE text/html text/css application/javascript application/x-javascript text/javascript text/xml text/plain application/force-download
+      # BrowserMatch ^Mozilla/4 gzip-only-text/html
+      # BrowserMatch ^Mozilla/4\.0[678] no-gzip
+      # BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+      BrowserMatch ^Mozilla/5.*Qt/4\.6\.1.Safari/532\.4$ no-gzip
+   </FilesMatch>
+   # This instructs the browser to compress all requests and uploads.
+   SetInputFilter DEFLATE
+</IfModule>

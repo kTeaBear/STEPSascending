@@ -1,0 +1,81 @@
+body {
+	font-weight:normal;
+	margin:0;
+	text-align: center;
+}
+fieldset {
+	padding:10px 15px 15px;
+	margin:5px;
+}
+legend {
+	padding:0 5px;
+}
+fieldset div {
+	text-align:center;
+	clear:both;
+}
+fieldset div label {
+	margin:5px;
+	display:block;
+	float:left;
+	text-align:right;
+	width:30%;
+}
+input.text_box {
+	display:block;
+	margin:5px;
+	float:left;
+	width:180px;
+	background-color: #E1F2FF;
+}
+input.text_box_long {
+	display:block;
+	margin:5px;
+	float:left;
+	width:280px;
+	background-color: #E1F2FF;
+}
+.text {
+	display:block;
+	margin:5px;
+	color:#000000;
+	font-family:Verdana,"Myriad Web",Syntax,sans-serif,helvetica,arial;
+	font-size:11px;
+	font-weight:500;
+}
+a:LINK, a:VISITED {
+	color:blue;
+	text-decoration: underline;
+}
+a:HOVER {
+	color:blueViolet;
+	text-decoration: underline;
+}
+.left {
+	float:left;
+}
+.error {
+	color:red;
+	text-align:left;
+	padding:5px 0 0;
+}
+.notice {
+	margin:0;
+	font-size:11px;
+	font-weight:normal;
+	font-family:Verdana,"Myriad Web",Syntax,sans-serif,helvetica,arial;
+}
+.red_text {
+	color:red;
+}
+br {
+	margin:1px;
+}
+.req_failed {
+	margin-left:15px;
+	color:red;
+	text-align:left;
+}
+#footertext a {
+	text-decoration: none;
+}
